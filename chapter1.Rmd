@@ -1,13 +1,14 @@
 
-# About the project
+"IODS Course Project"
 
-*Write a short description about the course and add a link to your GitHub repository here. This is an R Markdown (.Rmd) file so you should use R Markdown syntax.*
+*Introduction*
+  
+Hi, I am Odamboy Djumanazarov, I am a PhD student at the  University of Eastern Finland. I saw about this course from https://www.yammer.com/uef.fi. I learn open data science then I can utilize them in my research. for example, classify and predict  data received from sensors in Smart homes
 
-```{r}
-# This is a so-called "R chunk" where you can write R code.
+here my Github repository and Course Diary
+Odamboy Djumanazarov Github repository:(https://github.com/Odamboy-Djumanazarov/IODS-project)  
 
-date()
+Odamboy Djumanazarov Course Diary: 
+(https://odamboy-djumanazarov.github.io/IODS-project/)  
 
-```
-The text continues here.
 
