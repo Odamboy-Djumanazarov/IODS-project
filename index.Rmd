@@ -1,5 +1,6 @@
 ---
-title: "IODS course project"
+title:  "IODS course project"
+author: "Odamboy Djumanazarov"
 output:
   html_document:
     theme: cosmo
