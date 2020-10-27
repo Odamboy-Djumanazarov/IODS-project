@@ -1,13 +1,17 @@
-# Insert chapter 2 title here
 
-*Describe the work you have done this week and summarize your learning.*
+This week was an introduction class. It was about Open data science getting familiar with Rstudio, Github, and Datacamp. I did those tasks,   
+1. installation of tools  
+   R  
+   RStudio  
+   GitHub  
+ 2. Creating course templates**  
+  GitHub  
+  RStudio  
+3. Learing R on Datacamp**  
+4. Rstudio Excercise1: Tasks and Instructions**  
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods.
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using.
+ Once the update is done, refresh your GitHub project page and look for the changes you have made.  
 
-```{r}
-date()
-```
 
-Here we go again...
+
+

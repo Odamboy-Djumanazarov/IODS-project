@@ -1,19 +1,11 @@
 ---
-title:  "IODS course project"
+title: "IODS course project"
 author: "Odamboy Djumanazarov"
-output:
-  html_document:
-    theme: cosmo
-    toc: true
-    toc_depth: 2
-    fig_caption: true
-    fig_width: 6
-    fig_height: 4
+
 ---
 
 ***
 
-# Introduction to Open Data Science - Course Project
 
 ```{r child = "chapter1.Rmd"}
 # This will include Chapter 1 (that is updated in its own file) in the document.
@@ -27,5 +19,4 @@ output:
 
 ***
 
-(more chapters to be added similarly as we proceed with the course!)
 
