@@ -11,7 +11,11 @@ This week was an introduction class. It was about Open data science getting fami
 4. Rstudio Excercise1: Tasks and Instructions**  
 
 
+<<<<<<< HEAD
 Once the update is done, refresh your GitHub project page and look for the changes you have made.  
+=======
+ Once the update is done, refresh your GitHub project page and look for the changes you have made.  
+>>>>>>> 00bb74c97a096ca5000a37055a09f380db166f05
 
 
 
