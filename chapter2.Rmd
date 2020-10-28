@@ -9,14 +9,10 @@ This week was an introduction class. It was about Open data science getting fami
   RStudio  
 3. Learing R on Datacamp**  
 4. Rstudio Excercise1: Tasks and Instructions**  
-<<<<<<< HEAD
-
- Once the update is done, refresh your GitHub project page and look for the changes you have made.  
 
 
-=======
+Once the update is done, refresh your GitHub project page and look for the changes you have made.  
 
- Once the update is done, refresh your GitHub project page and look for the changes you have made.  
->>>>>>> d1186d20a48b4dd622516e7047114c72657949b3
+
 
 
