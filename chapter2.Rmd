@@ -1,5 +1,6 @@
+## **RStudio Exercise 1: Tasks and Instructions**
 
-This week was an introduction class. It was about Open data science getting familiar with Rstudio, Github, and Datacamp. I did those tasks,   
+## This week was an introduction class. It was about Open data science getting familiar with Rstudio, Github, and Datacamp. I did those tasks,   
 1. installation of tools  
    R  
    RStudio  
@@ -9,11 +10,27 @@ This week was an introduction class. It was about Open data science getting fami
   RStudio  
 3. Learing R on Datacamp**  
 4. Rstudio Excercise1: Tasks and Instructions**  
+## Once the update is done, refresh your GitHub project page and look for the changes you have made.  
 
 
 
+## **RStudio Exercise 2: Regression and Model Validation**
 
-Once the update is done, refresh your GitHub project page and look for the changes you have made.  
+I have completed the data wrangling exercises: I've read the data from the file with the help of *read.table* function, 
+
+
+```{r}
+
+create_learning2014 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
+
+dim(create_learning2014)
+
+str(create_learning2014)
+
+
+
+```
+
 
 
 
