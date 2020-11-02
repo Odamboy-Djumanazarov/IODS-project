@@ -21,11 +21,6 @@ I have completed the data wrangling exercises: I've read the data from the file 
 
 ```{r}
 
-create_learning2014 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
-
-dim(create_learning2014)
-
-str(create_learning2014)
 
 
 
