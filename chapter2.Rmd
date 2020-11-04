@@ -19,12 +19,6 @@
 I have completed the data wrangling exercises: I've read the data from the file with the help of *read.table* function, 
 
 
-```{r}
-
-
-
-
-```
 
 
 
