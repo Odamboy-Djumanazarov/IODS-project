@@ -1,4 +1,4 @@
-# Odamboy Djumanazarov - 1.11.2020
+# Odamboy Djumanazarov 
 # Exercise 2 for the IODS course - Regression and model validation
 
 
@@ -52,3 +52,70 @@ dim(create_learning2014)
 setwd("~/Odamboy-DjumanazarovIODS-project/IODS-project/data")
 write.csv(create_learning2014, file = "create_learning2014.csv")
 read.csv("create_learning2014.csv")
+str(create_learning2014)
+head(create_learning2014)
+
+
+#Data analysis
+
+#read the data
+learning2014 <- read.csv("create_learning2014.csv")
+
+str(learning2014)
+View(learning2014)
+dim(learning2014) 
+colnames(learning2014) 
+summary(learning2014)
+
+table(learning2014$gender) 
+table(learning2014$age)
+
+
+plot(learning2014[c(-1,-2)]) #[c(-1,-2)] >>> is to remove indexcolumn and gender (strings) elements of df, source: https://statisticsglobe.com/remove-element-from-list-in-r
+hist(learning2014$age, col='grey') 
+
+
+#install.packages("ggplot2")
+library(ggplot2)
+
+
+p1 <- ggplot(learning2014, aes(x = attitude, y = points, col = gender))
+p2 <- p1 + geom_point()
+p2
+p3 <- p2 + geom_smooth(method = "lm")
+p4 <- p3 + ggtitle("Student's attitude versus exam points")
+p4
+
+pairs(learning2014[c(-1:-2)])
+pairs(learning2014[c(-1:-2)], col= c("black", "red"))
+
+library(GGally)
+library(ggplot2)
+p <- ggpairs(learning2014[c(-1:-2)], mapping = aes(), lower = list(combo = wrap("facethist", bins = 20)))
+p
+
+
+qplot(attitude, points, data = learning2014) + geom_smooth(method = "lm")
+
+my_model <- lm(points ~ attitude, data = learning2014)
+summary(my_model)
+
+ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
+my_model2 <- lm(points ~ attitude + stra + surf, data = learning2014)
+summary(my_model2)
+
+
+par(mfrow = c(2,2)) #defines that plots go to 2*2 frame (joining plots together)
+plot(my_model4, which = c(1,2,5))
+
+
+boxplot(my_model4$residuals,
+        main = "Residuals of the model",
+        xlab = "Residual values",
+        ylab = "",
+        col = "orange",
+        border = "brown",
+        horizontal = F,
+        notch = F)
+
+
