@@ -1,0 +1,71 @@
+
+
+```{r readfiles}
+
+
+por <- read.table("~/Odamboy-DjumanazarovIODS-project/IODS-project/data/student/student-por.csv", sep = ";", header=TRUE)
+math <- read.table("~/Odamboy-DjumanazarovIODS-project/IODS-project/data/student/student-mat.csv", sep = ";", header=TRUE)
+
+
+
+```
+
+```{r explorefiles}
+# Explore the files
+dim(por)
+dim(math)
+str(por)
+str(math)
+```
+
+```{r joindata}
+
+#Join the data
+library(dplyr)
+join_by <- c("school", "sex", "age", "address", "famsize", "Pstatus", "Medu", "Fedu", "Mjob", "Fjob", "reason", "nursery","internet")
+mat_por_joined <- inner_join(por, math, by=join_by)
+dim(mat_por_joined)
+str(mat_por_joined)
+glimpse(mat_por_joined)
+# result intepretation : when i eplore joined data, it seems the duplicates are joined as x and y cordinates, so we have to remove the duplicates
+```
+
+```{r duplicate_removal}
+#To combine the duplicates
+# create a new data frame with only the joined columns
+alc <- select(mat_por_joined, one_of(join_by))
+# columns that were not used for joining the data
+notjoined_columns <- colnames(por)[!colnames(por) %in% join_by]
+# print out the columns not used for joining
+notjoined_columns
+# for every column name not used for joining...
+for(column_name in notjoined_columns) {
+  # select two columns from 'math_por' with the same original name
+  two_columns <- select(mat_por_joined, starts_with(column_name))
+  # select the first column vector of those two columns
+  first_column <- select(two_columns, 1)[[1]]
+  
+  # if that first column  vector is numeric...
+  if(is.numeric(first_column)) {
+    # take a rounded average of each row of the two columns and
+    # add the resulting vector to the alc data frame
+    alc[column_name] <- round(rowMeans(two_columns))
+  } else { # else if it's not numeric...
+    # add the first column vector to the alc data frame
+    alc[column_name] <- first_column
+  }
+}
+# glimpse at the new combined data
+glimpse(alc)
+```
+
+```{r creation_of_new_col}
+#Take average of weekend and weekday alcohol consumption by creating new column in the data
+alc <- mutate(alc, alc_use = (Dalc + Walc) / 2)
+#Create new column by highuse in which the students who have value more than 2 is TRUE
+alc <- mutate(alc, high_use = "alc_use" > 2)
+glimpse(alc)
+```
+
+write.csv(alc, "~/Odamboy-DjumanazarovIODS-project/IODS-project/data/student/alc_data.csv")
+write.table(alc, "~/Odamboy-DjumanazarovIODS-project/IODS-project/data/student/alc_data.txt")
