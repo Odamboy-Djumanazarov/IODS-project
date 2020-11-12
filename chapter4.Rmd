@@ -1,0 +1,119 @@
+---
+title: "Clustering and classification"
+output: html_document
+---
+
+
+**Loading** the Boston data and exploring the structure and dimensions: 
+
+```{r}
+# access the MASS package
+library(MASS)
+
+# load the data
+data("Boston")
+str(Boston)
+dim(Boston)
+```
+It has 506 obs. of  14 variables:
+
+
+**Graphical overview** of the data:
+```{r}
+# plot matrix of the variables
+pairs(Boston)
+```
+
+**Summaries** of the variables:
+```{r}
+summary(Boston)
+```
+
+**Scaling** the dataset:  
+```{r}
+# summaries of the scaled variables
+boston_scaled <- scale(Boston)
+summary(boston_scaled)
+# class of the boston_scaled object
+class(boston_scaled)
+# change the object to data frame
+boston_scaled <- as.data.frame(boston_scaled) #making our object a dataframe
+```
+
+**Creating a categorical variable:**
+```{r}
+summary(boston_scaled$crim)
+# create a quantile vector of crim and print it
+bins <- quantile(boston_scaled$crim)
+bins
+# create a categorical variable 'crime'
+crime <- cut(boston_scaled$crim, breaks = bins, include.lowest = TRUE, labels = c("low", "med_low", "med_high", "high"))
+# look at the table of the new factor crime
+table(crime)
+#dropping the old crime variable
+boston_scaled <- dplyr::select(boston_scaled, -crim)
+#adding the new crime variable to the dataset
+boston_scaled <- data.frame(boston_scaled, crime)
+```
+
+Now lets divide the dataset to **train** and **test** ones:
+```{r}
+n <- nrow(boston_scaled) #number of rows
+ind <- sample(n,  size = n * 0.8) #random choice of 80% of rows
+train <- boston_scaled[ind,] #train set
+test <- boston_scaled[-ind,] #test set
+```
+
+**linear discriminant analysis**:
+```{r}
+lda.fit <- lda(crime ~ ., data = train)
+# print the lda.fit object
+lda.fit
+# the function for lda biplot arrows
+lda.arrows <- function(x, myscale = 1, arrow_heads = 0.1, color = "orange", tex = 0.75, choices = c(1,2)){
+  heads <- coef(x)
+  arrows(x0 = 0, y0 = 0, 
+         x1 = myscale * heads[,choices[1]], 
+         y1 = myscale * heads[,choices[2]], col=color, length = arrow_heads)
+  text(myscale * heads[,choices], labels = row.names(heads), 
+       cex = tex, col=color, pos=3)
+}
+# target classes as numeric
+classes <- as.numeric(train$crime)
+# plot the lda results
+plot(lda.fit, dimen = 2, col = classes, pch = classes)
+lda.arrows(lda.fit, myscale = 1)
+```
+
+**K-means and other stuff**  
+
+For a start:
+```{r}
+library(MASS)
+data('Boston')
+Boston2 <- scale(Boston) #standartizing (scaling) a dataset
+Boston2 <- as.data.frame(Boston2) #saving as dataframe
+dist_eu <- dist(Boston2) #calculating distances between observations
+```
+
+Now lets run k-means:
+```{r}
+km <- kmeans(x = Boston2, centers = 3)
+```
+
+Now we can determine the optimal number of clusters:
+```{r}
+set.seed(123) #this function prevents k-means from randomly assigning the initial cluster centers
+k_max <- 10 #let the maximum amount of clusters be 10
+twcss <- sapply(1:k_max, function(k){kmeans(Boston2, k)$tot.withinss}) #calculating the total sum of squares
+library(ggplot2)
+qplot(x = 1:k_max, y = twcss, geom = 'line') #visualizing the clusters
+```
+
+The total WCSS changes radically around 2, which means **2 is an optimal number of clusters.**  
+Lets run the code again and plot it:
+```{r}
+km <-kmeans(Boston2, centers = 2)
+pairs(Boston2, col = km$cluster)
+```
+
