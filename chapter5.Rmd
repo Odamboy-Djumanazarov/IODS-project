@@ -1,0 +1,70 @@
+# Exercise 5
+
+### Overview
+Let us first take a look at the data. Let us see what variable it has, what kind of variable they are. Also we will check if there is any correlations between the variables.
+```{r}
+human <- read.csv('human.csv',row.names = 1)
+str(human)
+```
+The variables stand for:
+
+- eduFM = (Proportion of females with at least secondary education) / (Proportion of males with at least secondary education)
+- labFM = (Proportion of females in the labour force)/(Proportion of males in the labour force)
+- ExpEdu = Expected years of schooling 
+- ExpLife = Life expectancy at birth
+- GNI = Gross National Income per capita
+- MMR = Maternal mortality ratio
+- BirthRate = Adolescent birth rate
+- PP = Percetange of female representatives in parliament
+
+```{r message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(GGally)
+ggpairs(human)
+cor(human) %>%corrplot::corrplot()
+```
+We notice that there is a highly negative correlation between MMR and ExpLife. That means that the bigger chance to die during the birth the shorter life is. Also, ExpEdu (Expected years of schooling) and ExpLife (Life expectancy at birth) have a strong positive correlation.
+
+### PCA on the non standardized data
+Now it is time to perform PCA. I am going to do it on the non standardized data.
+```{r warning=FALSE}
+pca_non_sta <- prcomp(human)
+summary(pca_non_sta)
+biplot(pca_non_sta, choices = 1:2)
+```
+The results we got don't make sense at all. The reason for it is that our data is not standardized.
+
+### PCA on the standardized data
+Let us do PCA on the standardized data this time.
+```{r}
+human <- scale(human) # standardizing
+pca_sta <- prcomp(human)
+summary(pca_sta)
+biplot(pca_sta, choices = 1:2, cex = c(0.5, 1), col = c("pink", "black"))
+```
+The analysis on the standardized data produces more realstic and more useful results than the previous one did.
+
+### Interpretation
+
+The high maternal mortality ratio and the high adolescent birth rate are one of the signs of the developing country. On the other hand, hign education, long life and hinf GNI are something that is often related to the developed countries. So the first principal component measures how much the country is  developed.
+
+The second component have a strong positive correlation with PP and labFM, when PP stands for percetange of female representatives in parliament and labFM - female proportion in the labour force compared to male one. I would say that this component show how equal women are compared to the men.   
+
+### Tea data
+
+Now we are going to do MCA on the tea dataset. 
+```{r warning=FALSE}
+# download "tea"
+library(FactoMineR)
+library(tidyr)
+data(tea)
+tea <- dplyr::select(tea, one_of(c("tea.time", "tearoom", "Tea","age_Q", "sex")))
+tea <- filter(tea, complete.cases(tea))
+gather(tea) %>% ggplot(aes(value)) +
+  facet_wrap("key", scales = "free") +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size= 9))
+mca <- MCA(tea, graph = FALSE)
+plot(mca, invisible = c("ind"))
+```

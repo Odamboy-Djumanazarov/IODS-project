@@ -1,7 +1,6 @@
 ---
 title: "Clustering and classification"
-output: html_document
----
+ ---
 
 
 **Loading** the Boston data and exploring the structure and dimensions: 
