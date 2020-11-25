@@ -5,17 +5,6 @@
 human <- read.csv('human.csv',row.names = 1)
 str(human)
 ```
-The variables stand for:
-
-- eduFM = (Proportion of females with at least secondary education) / (Proportion of males with at least secondary education)
-- labFM = (Proportion of females in the labour force)/(Proportion of males in the labour force)
-- ExpEdu = Expected years of schooling 
-- ExpLife = Life expectancy at birth
-- GNI = Gross National Income per capita
-- MMR = Maternal mortality ratio
-- BirthRate = Adolescent birth rate
-- PP = Percetange of female representatives in parliament
-
 ```{r message=FALSE}
 library(dplyr)
 library(ggplot2)
