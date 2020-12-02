@@ -1,11 +1,12 @@
-# Analysis of longitudinal data (Exercise 6)
+# *Analysis of longitudinal data (Exercise 6)*
+
 Read data
 ```{r}
 BPRS<-read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/BPRS.txt", sep=" ", header=TRUE)
 RATS<- read.table("https://raw.githubusercontent.com/KimmoVehkalahti/MABS/master/Examples/data/rats.txt", sep="\t", header=TRUE)
 library(ggplot2);library(dplyr);library(tidyr)
 ```
-## Task 1
+# *Task 1*
 
 Convert catergorial variables in RATS dataset to factors and to long form
 ```{r}
@@ -63,7 +64,7 @@ p7<-p6+scale_y_continuous(name="mean(weights) +/- se(weights)")
 p7
 ```
 
-## Task 2
+# *Task 2*
 
 ```{r}
 BPRS$treatment<-factor(BPRS$treatment)
