@@ -1,4 +1,4 @@
-# *Analysis of longitudinal data (Exercise 6)*
+# *Analysis of longitudinal data. Task 6 *
 
 Read data
 ```{r}
